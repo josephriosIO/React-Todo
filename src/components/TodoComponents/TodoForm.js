@@ -4,7 +4,12 @@ const TodoForm = props => {
   const { task, updateTodo, addToTodo } = props;
   return (
     <form>
-      <input value={task} onChange={updateTodo.bind(this)} name="task" />
+      <input
+        placeholder="new task..."
+        value={task}
+        onChange={updateTodo.bind(this)}
+        name="task"
+      />
       <button onClick={addToTodo}> Add Todo </button>
     </form>
   );

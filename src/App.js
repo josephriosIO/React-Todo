@@ -2,18 +2,7 @@ import React, { Component } from "react";
 import Todo from "./components/TodoComponents/Todo";
 import TodoForm from "./components/TodoComponents/TodoForm";
 
-const items = [
-  {
-    id: 1,
-    task: "throw away trash",
-    completed: false
-  },
-  {
-    id: 2,
-    task: "clean room",
-    completed: false
-  }
-];
+const items = [];
 
 class App extends Component {
   // you will need a place to store your state in this component.
@@ -39,12 +28,17 @@ class App extends Component {
     const newTodo = {
       id: Date.now(),
       task: this.state.task,
-      completed: ""
+      completed: false
     };
 
     this.setState({
       todoList: [...this.state.todoList, newTodo]
     });
+  };
+
+  completeTheTask = id => {
+    // const
+    // todoList: [...this.state.todoList, ]
   };
 
   render() {
@@ -53,7 +47,13 @@ class App extends Component {
         <h2>Welcome to your Todo App!</h2>
         <div>
           {this.state.todoList.map(item => (
-            <Todo itemList={item} />
+            <Todo
+              key={item.id}
+              itemList={item}
+              completeTheTask={this.completeTheTask.bind(
+                this.state.todoList.id
+              )}
+            />
           ))}
           <TodoForm
             task={this.state.task}
