@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Todo from "./components/TodoComponents/Todo";
+import TodoForm from "./components/TodoComponents/TodoForm";
 
 const items = [
   {
@@ -22,9 +23,29 @@ class App extends Component {
     super();
 
     this.state = {
-      todoList: items
+      todoList: items,
+      task: ""
     };
   }
+
+  updateTodo = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  addToTodo = e => {
+    e.preventDefault();
+    const newTodo = {
+      id: Date.now(),
+      task: this.state.task,
+      completed: ""
+    };
+
+    this.setState({
+      todoList: [...this.state.todoList, newTodo]
+    });
+  };
 
   render() {
     return (
@@ -34,6 +55,11 @@ class App extends Component {
           {this.state.todoList.map(item => (
             <Todo itemList={item} />
           ))}
+          <TodoForm
+            task={this.state.task}
+            updateTodo={this.updateTodo}
+            addToTodo={this.addToTodo}
+          />
         </div>
       </div>
     );
