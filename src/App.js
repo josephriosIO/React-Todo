@@ -37,8 +37,14 @@ class App extends Component {
   };
 
   completeTheTask = id => {
-    // const
-    // todoList: [...this.state.todoList, ]
+    this.setState({
+      todoList: this.state.todoList.map(item => {
+        if (id === id) {
+          return { ...item, completed: !item.completed };
+        }
+        return item;
+      })
+    });
   };
 
   render() {
