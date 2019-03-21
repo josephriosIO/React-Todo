@@ -32,14 +32,15 @@ class App extends Component {
     };
 
     this.setState({
-      todoList: [...this.state.todoList, newTodo]
+      todoList: [...this.state.todoList, newTodo],
+      task: ""
     });
   };
 
   completeTheTask = id => {
     this.setState({
       todoList: this.state.todoList.map(item => {
-        if (id === id) {
+        if (id === item.id) {
           return { ...item, completed: !item.completed };
         }
         return item;
@@ -47,10 +48,19 @@ class App extends Component {
     });
   };
 
+  clearTasks = e => {
+    e.preventDefault();
+    this.setState({
+      todoList: this.state.todoList.filter(item => !item.completed)
+    });
+  };
+
   render() {
     return (
-      <div>
-        <h2>Welcome to your Todo App!</h2>
+      <div className="container">
+        <h2 className="nav justify-content-center">
+          Welcome to your Todo App!
+        </h2>
         <div>
           {this.state.todoList.map(item => (
             <Todo
@@ -65,6 +75,7 @@ class App extends Component {
             task={this.state.task}
             updateTodo={this.updateTodo}
             addToTodo={this.addToTodo}
+            clearTasks={this.clearTasks}
           />
         </div>
       </div>
